@@ -1,1 +1,1 @@
-web: gunicorn index:app --log-file -
+web: gunicorn -k uvicorn.workers.UvicornWorker --bind "0.0.0.0:8080" --log-level debug index:app
