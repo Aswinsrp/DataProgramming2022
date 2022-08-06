@@ -1,4 +1,4 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter
 from config.db import collection_name
 from models.covidData_model import Cases
 from schema.covidData_schema import covidData_serializer, covidDatas_serializer
@@ -6,7 +6,6 @@ from fastapi.responses import FileResponse
 import os
 
 router = APIRouter()
-app = FastAPI()
 
 @router.get('/healthCheck')
 async def doHealthCheck():
@@ -17,7 +16,7 @@ async def getData():
      data = covidDatas_serializer(collection_name.find())
      return {"data": data}
 
-@app.get('/favicon.ico')
+@router.get('/favicon.ico')
 async def favicon():
     file_name = "favicon.png"
     file_path = os.path.join(app.root_path, "images")
